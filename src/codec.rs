@@ -6,13 +6,12 @@ use byteorder::ReadBytesExt;
 use byteorder::WriteBytesExt;
 use libflate::zlib;
 use num::bigint::BigInt;
-use std;
-use std::convert::From;
-use std::error;
-use std::fmt;
-use std::io;
-use std::io::Write;
-use std::str;
+use std::{
+    convert::From,
+    error, fmt,
+    io::{self, Write},
+    str,
+};
 
 /// Errors which can occur when decoding a term
 #[derive(Debug)]
