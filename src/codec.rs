@@ -55,17 +55,6 @@ impl fmt::Display for DecodeError {
     }
 }
 impl error::Error for DecodeError {
-    fn description(&self) -> &str {
-        use self::DecodeError::*;
-        match *self {
-            Io(ref x) => x.description(),
-            UnsupportedVersion { .. } => "Unsupported format version",
-            UnknownTag { .. } => "Unknown term tag",
-            UnexpectedType { .. } => "Unexpected term type",
-            OutOfRange { .. } => "Integer value is out of range",
-            NonFiniteFloat => "Non-finite float is not supported",
-        }
-    }
     fn cause(&self) -> Option<&(dyn error::Error + 'static)> {
         match *self {
             DecodeError::Io(ref x) => x.source(),
@@ -107,15 +96,6 @@ impl fmt::Display for EncodeError {
     }
 }
 impl error::Error for EncodeError {
-    fn description(&self) -> &str {
-        use self::EncodeError::*;
-        match *self {
-            Io(ref x) => x.description(),
-            TooLongAtomName(_) => "Too long atom name",
-            TooLargeInteger(_) => "Too large integer value",
-            TooLargeReferenceId(_) => "Too large reference identifier",
-        }
-    }
     fn source(&self) -> Option<&(dyn error::Error + 'static)> {
         match *self {
             EncodeError::Io(ref x) => x.source(),
